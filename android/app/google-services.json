@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "705788101319",
+    "project_id": "boliviatour-b483a",
+    "storage_bucket": "boliviatour-b483a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:705788101319:android:6342c4658488d187f0b4e2",
+        "android_client_info": {
+          "package_name": "com.boliviatour"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "705788101319-iq6vticurbd9t45h35u6dk1ej0kamnjb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrTBIOCLskTZHSdgK4s3q4qTBremcfsRM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "705788101319-iq6vticurbd9t45h35u6dk1ej0kamnjb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
