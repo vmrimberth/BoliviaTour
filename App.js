@@ -6,8 +6,8 @@ import LugarTuristico from "./src/screens/LugarTuristico";
 
 const App = () => {
 
+  
   return (
-    
     <SafeAreaView style={{flex: 1}}>
       <LugarTuristico/>
     </SafeAreaView>
