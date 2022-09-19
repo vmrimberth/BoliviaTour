@@ -3,13 +3,14 @@ import { SafeAreaView} from "react-native";
 
 
 import LugarTuristico from "./src/screens/LugarTuristico";
+import EmpresaTuristica from "./src/screens/EmpresaTuristica";
 
 const App = () => {
 
   
   return (
     <SafeAreaView style={{flex: 1}}>
-      <LugarTuristico/>
+      <EmpresaTuristica/>
     </SafeAreaView>
   );
 };

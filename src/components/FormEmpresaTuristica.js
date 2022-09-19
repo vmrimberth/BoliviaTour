@@ -6,95 +6,87 @@ import {launchImageLibrary} from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
 
-const FormLugarTuristico = (props) => {
-    
+const FormEmpresaTuristica = (props) => {
+
     const [referenceStorage, setReferenceStorage] = useState();
     const [fileName, setFileName] = useState();
     const [pathFile, setPathFile] = useState();
     const [isLoading, setIsLoading] = useState();
-    const {onClose} = props
+    const {onClose} =props
 
-    const FormLugarTuristicoSchema = Yup.object().shape({
+    const FormEmpresaTuristicaSchema = Yup.object().shape({
         nombre: Yup.string().required('Campo requerido'),
-        departamento: Yup.string().required('Campo requerido'),
-        provincia: Yup.string().required('Campo requerido'),
-        municipio: Yup.string().required('Campo requerido'),
-        //imagen: Yup.string().required('Campo requerido')
+        telefono: Yup.string().required('Campo requerido'),
+        correo: Yup.string().required('Campo requerido'),
+        direccion: Yup.string().required('Campo requerido')
     });
 
     const handleGallery = async () => {
-        // You can also use as a promise without 'callback':
         const result = await launchImageLibrary();
         if(result.assets.length > 0){
             const tempFileName = result.assets[0].fileName;
             const tempPathFile = result.assets[0].uri;
-            setReferenceStorage(storage().ref(tempFileName))
-            setFileName(tempFileName)
-            setPathFile(tempPathFile)
+            setReferenceStorage(storage().ref(tempFileName));
+            setFileName(tempFileName);
+            setPathFile(tempPathFile);
         }
-        //console.log('result', result)
     };
 
     const handleForm = (values) => {
-        //values => console.log('values ',values)
         setIsLoading(true);
         referenceStorage.putFile(pathFile).then(response => {
-            console.log('exitoso')
-            handleFirestore(values)
+            console.log('exitoso empresa turistica');
+            handleFirestore(values);
         }).catch(error => {
-            console.log('error', error)
-        })
-    }
-
-    const handleFirestore = (values) => {
-        firestore()
-        .collection('lugar_turistico')
-        .add({
-            ...values, 
-            imagen: fileName
-        })
-        .then(response => {
-            Keyboard.dismiss();
-            setIsLoading(false);
-            onClose();
-            console.log('Guardado...');
-        })
-        .catch(error => {
-            console.log('error', error)
+            console.log('error', error);
         });
     };
 
-    return (
+    const handleFirestore = (values) => {
+        firestore().collection('empresa_turistica').add({
+            ...values,
+            imagen: fileName
+        }).then(response => {
+            Keyboard.dismiss();
+            setIsLoading(false);
+            onClose();
+            console.log('Guardado empresa turistica...');
+        }).catch(error => {
+            console.log('error', error);
+        });
+    };
+
+    return(
         <Formik
-            initialValues={{nombre:'', departamento:'', provincia:'', municipio:''}}
+            initialValues={{nombre:'', telefono:'', correo:'', direccion:''}}
             onSubmit={handleForm}
-            validationSchema={FormLugarTuristicoSchema}
+            validationSchema={FormEmpresaTuristicaSchema}
         >
             {({handleChange, handleSubmit, values, errors}) => (
                 <View style={styles.containerForm}>
                     <Text style={styles.labelInput}>Nombre:</Text>
-                    <TextInput style={styles.input} value={values.nombre} onChangeText={handleChange('nombre')} placeholder="Nombre lugar turistico..."/>
+                    <TextInput style={styles.input} value={values.nombre} onChangeText={handleChange('nombre')} placeholder="Nombre..."/>
                     {
                         errors.nombre && (
                         <Text style={styles.messageError}>{errors.nombre}</Text>
                     )}
-                    <Text style={styles.labelInput}>Departamento:</Text>
-                    <TextInput style={styles.input} value={values.departamento} onChangeText={handleChange('departamento')} placeholder="Departamento..."/>
+                    <Text style={styles.labelInput}>Telefono:</Text>
+                    <TextInput style={styles.input} value={values.telefono} onChangeText={handleChange('telefono')} placeholder="Telefono..."/>
                     {
-                        errors.departamento && (
-                        <Text style={styles.messageError}>{errors.departamento}</Text>
+                        errors.telefono && (
+                        <Text style={styles.messageError}>{errors.telefono}</Text>
                     )}
-                    <Text style={styles.labelInput}>Provincia:</Text>
-                    <TextInput style={styles.input} value={values.provincia} onChangeText={handleChange('provincia')} placeholder="Provincia..."/>
+                    <Text style={styles.labelInput}>Correo:</Text>
+                    <TextInput style={styles.input} value={values.correo} onChangeText={handleChange('correo')} placeholder="Correo..."/>
                     {
-                        errors.provincia && (
-                        <Text style={styles.messageError}>{errors.provincia}</Text>
+                        errors.correo && (
+                        <Text style={styles.messageError}>{errors.correo}</Text>
                     )}
-                    <Text style={styles.labelInput}>Municipio:</Text>
-                    <TextInput style={styles.input} value={values.municipio} onChangeText={handleChange('municipio')} placeholder="Municipio..."/>
+                    <Text style={styles.labelInput}>Direccion:</Text>
+                    <TextInput style={styles.input} value={values.direccion} onChangeText={handleChange('direccion')} placeholder="Direccion..."/>
                     {
-                        errors.municipio && (
-                        <Text style={styles.messageError}>{errors.municipio}</Text>
+                        errors.direccion && (
+                        <Text style={styles.messageError}>{errors.direccion}</Text>
                     )}
 
                     <Text style={styles.labelInput}>Imagen:</Text>
@@ -103,13 +95,8 @@ const FormLugarTuristico = (props) => {
                             <TextInput 
                             style={styles.input} 
                             value={fileName} 
-                            //onChangeText={handleChange('imagen')} 
                             placeholder="Imagen..."
                             />
-                            {/*
-                                errors.imagen && (
-                                <Text style={styles.messageError}>{errors.imagen}</Text>
-                                )*/}
                         </View>
                         <Button 
                         style={{with:'20%'}} 
@@ -124,7 +111,6 @@ const FormLugarTuristico = (props) => {
                     )}
                 </View>
             )}
-
         </Formik>
     );
 }
@@ -153,4 +139,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default FormLugarTuristico;
+export default FormEmpresaTuristica;
