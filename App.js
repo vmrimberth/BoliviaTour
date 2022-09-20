@@ -4,9 +4,14 @@ import React, { useEffect } from "react";
 import { SafeAreaView, StyleSheet, Text, View} from "react-native";
 
 import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import LugarTuristico from "./src/screens/LugarTuristico";
 import EmpresaTuristica from "./src/screens/EmpresaTuristica";
+import Hotel from './src/screens/Hotel';
+import LugarTuristicoDetail from './src/screens/LugarTuristicoDetail';
+import { navigationRef } from './src/utils/RootNavigation';
+
 
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -14,12 +19,25 @@ const Tab = createBottomTabNavigator();
 
 const App = () => {
 
+  const Stack = createNativeStackNavigator();
+
   const LugarTuristicoScreen = () => {
     return (
       <View style={styles.container}>
         
         <SafeAreaView style={{flex: 1}}>
           <LugarTuristico/>
+        </SafeAreaView>
+      </View>
+    );
+  };
+
+  const LugarTuristicoDetailScreen = () => {
+    return (
+      <View style={styles.container}>
+        
+        <SafeAreaView style={{flex: 1}}>
+          <LugarTuristicoDetail/>
         </SafeAreaView>
       </View>
     );
@@ -36,8 +54,28 @@ const App = () => {
     );
   };
   
+  const HotelScreen = () => {
+    return (
+      <View style={styles.container}>
+        
+        <SafeAreaView style={{flex: 1}}>
+          <Hotel/>
+        </SafeAreaView>
+      </View>
+    );
+  };
+
+  const LugarTuristicoNavigator = () => {
+    return (
+        <Stack.Navigator>
+          <Stack.Screen name="LugarTuristico" component={LugarTuristicoScreen} />
+          <Stack.Screen name="LugarTuristicoDetail" component={LugarTuristicoDetailScreen} />
+        </Stack.Navigator>
+    );
+  };
+
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <Tab.Navigator
       screenOptions={({route}) => ({
         tabBarIcon: ({ focused, size, color}) => {
@@ -57,9 +95,9 @@ const App = () => {
         }
       })}
       >
-        <Tab.Screen name="LugarTuristico" component={LugarTuristicoScreen} />
+        <Tab.Screen name="LugarTuristico" component={LugarTuristicoNavigator} />
         <Tab.Screen name="EmpresaTuristica" component={EmpresaTuristicaScreen} />
-        <Tab.Screen name="Hotel" component={LugarTuristicoScreen} />
+        <Tab.Screen name="Hotel" component={HotelScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );

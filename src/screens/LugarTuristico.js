@@ -8,7 +8,9 @@ import LinearGradient from "react-native-linear-gradient";
 import ItemLugarTuristico from "../components/ItemLugarTuristico";
 import ModalLugarTuristico from "../components/ModalLugarTuristico";
 
-const LugarTuristico = () => {
+const LugarTuristico = (props) => {
+
+    console.log('props', props)
 
     const [lugarTuristicoList, setLugarTuristicoList] = useState([]);
     const [isVisible, setIsVisible] = useState(false);
