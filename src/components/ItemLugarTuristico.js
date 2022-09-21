@@ -1,10 +1,15 @@
 import React from "react";
-import { Text, StyleSheet, View, Image } from "react-native";
+import { Text, StyleSheet, View, Image, TouchableOpacity } from "react-native";
+import * as RootNavigation from '../utils/RootNavigation'
 
 const ItemLugarTuristico = ({item}) => {
     //console.log("item: ", item)
+    const handleNavigation = () => {
+        RootNavigation.navigate('LugarTuristicoDetail', {firestoreId:item.firebaseId, imagen:item.imagen});
+    };
+
     return (
-        <View style={styles.containerItem}>
+        <TouchableOpacity style={styles.containerItem} onPress={handleNavigation}>
             <View style={styles.imgContainer}>
                 <Image source={{uri:item.imagen}} style={{width:100, height:100}}></Image>
             </View>
@@ -15,7 +20,7 @@ const ItemLugarTuristico = ({item}) => {
                 <Text style={styles.itemTxtLugarTuristico}>{item.provincia}</Text>
                 <Text style={styles.itemTxtLugarTuristico}>{item.municipio}</Text>
             </View>
-        </View>
+        </TouchableOpacity>
     );
 };
 

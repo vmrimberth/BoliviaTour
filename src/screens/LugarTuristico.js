@@ -10,7 +10,7 @@ import ModalLugarTuristico from "../components/ModalLugarTuristico";
 
 const LugarTuristico = (props) => {
 
-    console.log('props', props)
+    //console.log('props', props)
 
     const [lugarTuristicoList, setLugarTuristicoList] = useState([]);
     const [isVisible, setIsVisible] = useState(false);
@@ -30,7 +30,7 @@ const LugarTuristico = (props) => {
             let promiseImages = [];
             fLugarTuristicoList.forEach(fLugarTuristico => {
                 //console.log('Lugar Turistico: ', fLugarTuristico.data())
-                tempLugarTuristicoList.push(fLugarTuristico.data());
+                tempLugarTuristicoList.push({...fLugarTuristico.data(), firebaseId: fLugarTuristico.id});
                 promiseImages.push(storage().ref(fLugarTuristico.data().imagen).getDownloadURL());
             });
             const resultPromises = await Promise.all(promiseImages);
@@ -64,7 +64,7 @@ const LugarTuristico = (props) => {
       );
 
     return(
-        <View >
+        <View style={styles.screenContainer}>
             <FlatList 
                 style={{height:'90%'}} 
                 data={lugarTuristicoList} 
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     screenContainer: {
       flex: 1,
       justifyContent: "center",
-      padding: 16
+      padding: 1
     },
     appButtonContainer: {
       elevation: 8,

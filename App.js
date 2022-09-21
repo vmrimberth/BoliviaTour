@@ -7,11 +7,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import LugarTuristico from "./src/screens/LugarTuristico";
-import EmpresaTuristica from "./src/screens/EmpresaTuristica";
-import Hotel from './src/screens/Hotel';
 import LugarTuristicoDetail from './src/screens/LugarTuristicoDetail';
+import EmpresaTuristica from "./src/screens/EmpresaTuristica";
+import EmpresaTuristicaDetail from "./src/screens/EmpresaTuristicaDetail"
+import Hotel from './src/screens/Hotel';
+import HotelDetail from './src/screens/HotelDetail'
 import { navigationRef } from './src/utils/RootNavigation';
-
 
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -21,83 +22,62 @@ const App = () => {
 
   const Stack = createNativeStackNavigator();
 
-  const LugarTuristicoScreen = () => {
+  const LugarTuristicoStackScreen = () => {
     return (
-      <View style={styles.container}>
-        
-        <SafeAreaView style={{flex: 1}}>
-          <LugarTuristico/>
-        </SafeAreaView>
-      </View>
+        <Stack.Navigator>
+          <Stack.Screen name="LugarTuristicoScreen" component={LugarTuristico} options={{headerShown:false}}/>
+          <Stack.Screen name="LugarTuristicoDetail" component={LugarTuristicoDetail} />
+        </Stack.Navigator>
     );
   };
 
-  const LugarTuristicoDetailScreen = () => {
+  const EmpresaTuristicaStackScreen = () => {
     return (
-      <View style={styles.container}>
-        
-        <SafeAreaView style={{flex: 1}}>
-          <LugarTuristicoDetail/>
-        </SafeAreaView>
-      </View>
-    );
-  };
-
-  const EmpresaTuristicaScreen = () => {
-    return (
-      <View style={styles.container}>
-        
-        <SafeAreaView style={{flex: 1}}>
-          <EmpresaTuristica/>
-        </SafeAreaView>
-      </View>
+      <Stack.Navigator>
+        <Stack.Screen name='EmpresaTuristicaScreen' component={EmpresaTuristica} options={{headerShown:false}}/>
+        <Stack.Screen name='EmpresaTuristicaDetail' component={EmpresaTuristicaDetail} />
+      </Stack.Navigator>
     );
   };
   
-  const HotelScreen = () => {
+  const HotelStackScreen = () => {
     return (
-      <View style={styles.container}>
-        
-        <SafeAreaView style={{flex: 1}}>
-          <Hotel/>
-        </SafeAreaView>
-      </View>
+      <Stack.Navigator>
+        <Stack.Screen name='HotelScreen' component={Hotel} options={{headerShown:false}}/>
+        <Stack.Screen name='HotelDetail' component={HotelDetail}/>
+      </Stack.Navigator>
     );
   };
 
-  const LugarTuristicoNavigator = () => {
-    return (
-        <Stack.Navigator>
-          <Stack.Screen name="LugarTuristico" component={LugarTuristicoScreen} />
-          <Stack.Screen name="LugarTuristicoDetail" component={LugarTuristicoDetailScreen} />
-        </Stack.Navigator>
-    );
+  const createScreenOptions = ({route}) =>{
+    return{
+      tabBarIcon: ({focused, size, color}) => {      
+        let iconName = '';
+        switch (route.name) {
+          case "LugarTuristico":
+            iconName = focused ? 'home' : 'home-outline';
+            break;
+          case "EmpresaTuristica":
+            iconName = focused ? 'person-circle' : 'person-circle-outline';
+            break;
+          case 'Hotel':
+            iconName = focused ? 'cog' : 'cog-outline';
+            break;
+        }
+        return(<Icon name = { iconName } size = { size } color = { color } />)
+      },
+      headerShown:false
+    };
   };
 
   return (
     <NavigationContainer ref={navigationRef}>
       <Tab.Navigator
-      screenOptions={({route}) => ({
-        tabBarIcon: ({ focused, size, color}) => {
-          let iconName = '';
-          switch (route.name) {
-            case "LugarTuristico":
-              iconName = focused ? 'home' : 'home-outline';
-              break;
-            case "EmpresaTuristica":
-              iconName = focused ? 'person-circle' : 'person-circle-outline';
-              break;
-            case 'Hotel':
-              iconName = focused ? 'cog' : 'cog-outline';
-              break;
-          }
-          return <Icon name = { iconName } size = { size } color = { color } />
-        }
-      })}
+      screenOptions={createScreenOptions}
       >
-        <Tab.Screen name="LugarTuristico" component={LugarTuristicoNavigator} />
-        <Tab.Screen name="EmpresaTuristica" component={EmpresaTuristicaScreen} />
-        <Tab.Screen name="Hotel" component={HotelScreen} />
+        <Tab.Screen name="LugarTuristico" component={LugarTuristicoStackScreen} />
+        <Tab.Screen name="EmpresaTuristica" component={EmpresaTuristicaStackScreen} />
+        <Tab.Screen name="Hotel" component={HotelStackScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
