@@ -64,6 +64,10 @@ const FormLugarTuristico = (props) => {
         });
     };
 
+    const handleClose = () => {
+        onClose()
+    }
+
     return (
         <Formik
             initialValues={{nombre:'', departamento:'', provincia:'', municipio:''}}
@@ -120,7 +124,10 @@ const FormLugarTuristico = (props) => {
                     {isLoading ? (
                         <ActivityIndicator color={"#000"} size={50}/>
                     ) : (
-                        <Button title="Guardar" onPress={handleSubmit}/>
+                        <View>
+                            <Button title="Guardar" onPress={handleSubmit}/>
+                            <Button title="Cancelar" onPress={handleClose}/>
+                        </View>
                     )}
                 </View>
             )}

@@ -55,13 +55,13 @@ const App = () => {
         let iconName = '';
         switch (route.name) {
           case "LugarTuristico":
-            iconName = focused ? 'home' : 'home-outline';
+            iconName = focused ? 'earth' : 'earth-outline';
             break;
           case "EmpresaTuristica":
-            iconName = focused ? 'person-circle' : 'person-circle-outline';
+            iconName = focused ? 'list-circle' : 'list-circle-outline';
             break;
           case 'Hotel':
-            iconName = focused ? 'cog' : 'cog-outline';
+            iconName = focused ? 'business' : 'business-outline';
             break;
         }
         return(<Icon name = { iconName } size = { size } color = { color } />)
