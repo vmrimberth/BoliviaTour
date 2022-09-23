@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     containerItem: {
         flexDirection: 'row',
         padding: 10,
-        backgroundColor: 'wwhite',
+        backgroundColor: 'white',
         margin: 10,
         elevation: 5,
         borderRadius:5

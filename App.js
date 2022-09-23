@@ -26,7 +26,7 @@ const App = () => {
     return (
         <Stack.Navigator>
           <Stack.Screen name="LugarTuristicoScreen" component={LugarTuristico} options={{headerShown:false}}/>
-          <Stack.Screen name="LugarTuristicoDetail" component={LugarTuristicoDetail} />
+          <Stack.Screen name="LugarTuristicoDetail" component={LugarTuristicoDetail} options={{title:'Detalle de lugar turistico'}}/>
         </Stack.Navigator>
     );
   };
@@ -35,7 +35,7 @@ const App = () => {
     return (
       <Stack.Navigator>
         <Stack.Screen name='EmpresaTuristicaScreen' component={EmpresaTuristica} options={{headerShown:false}}/>
-        <Stack.Screen name='EmpresaTuristicaDetail' component={EmpresaTuristicaDetail} />
+        <Stack.Screen name='EmpresaTuristicaDetail' component={EmpresaTuristicaDetail} options={{title:'Detalle de empresa turistica'}}/>
       </Stack.Navigator>
     );
   };
@@ -44,7 +44,7 @@ const App = () => {
     return (
       <Stack.Navigator>
         <Stack.Screen name='HotelScreen' component={Hotel} options={{headerShown:false}}/>
-        <Stack.Screen name='HotelDetail' component={HotelDetail}/>
+        <Stack.Screen name='HotelDetail' component={HotelDetail} options={{title:'Detalle de hotel'}}/>
       </Stack.Navigator>
     );
   };

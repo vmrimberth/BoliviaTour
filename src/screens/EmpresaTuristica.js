@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, FlatList, View } from "react-native";
+import { Button, FlatList, View, StyleSheet } from "react-native";
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
 
@@ -47,7 +47,7 @@ const EmpresaTuristica = () => {
     }
 
     return(
-        <View>
+        <View style={styles.screenContainer}>
             <FlatList
                 style={{height:'90%'}}
                 data={empresaTuristicaList}
@@ -63,4 +63,11 @@ const EmpresaTuristica = () => {
     );
 }
 
+const styles = StyleSheet.create({
+    screenContainer: {
+      flex: 1,
+      justifyContent: "center",
+      padding: 1
+    }
+  });
 export default EmpresaTuristica;

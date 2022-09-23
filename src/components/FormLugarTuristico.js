@@ -103,7 +103,7 @@ const FormLugarTuristico = (props) => {
 
                     <Text style={styles.labelInput}>Imagen:</Text>
                     <View style={styles.containerImagen}>
-                        <View style={{width:'75%' }}>
+                        <View style={{width:'100%' }}>
                             <TextInput 
                             style={styles.input} 
                             value={fileName} 
@@ -116,7 +116,7 @@ const FormLugarTuristico = (props) => {
                                 )*/}
                         </View>
                         <Button 
-                        style={{with:'20%'}} 
+                        style={{with:'15%'}} 
                         onPress={handleGallery} 
                         title="Imagen" 
                         />
@@ -124,7 +124,7 @@ const FormLugarTuristico = (props) => {
                     {isLoading ? (
                         <ActivityIndicator color={"#000"} size={50}/>
                     ) : (
-                        <View>
+                        <View style={styles.containerButton}>
                             <Button title="Guardar" onPress={handleSubmit}/>
                             <Button title="Cancelar" onPress={handleClose}/>
                         </View>
@@ -155,8 +155,11 @@ const styles = StyleSheet.create({
     },
     containerImagen:{
         justifyContent:'space-between',
+        flexDirection: 'row'
+    },
+    containerButton: {
         flexDirection: 'row',
-        alignItems:'flex-start'
+        justifyContent:'space-between'
     }
 });
 

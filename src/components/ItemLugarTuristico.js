@@ -17,8 +17,6 @@ const ItemLugarTuristico = ({item}) => {
             <View style={styles.descriptionContainer}>
                 <Text style={styles.itemTxtLugarTuristico}>{item.nombre}</Text>
                 <Text style={styles.itemTxtLugarTuristico}>{item.departamento}</Text>
-                <Text style={styles.itemTxtLugarTuristico}>{item.provincia}</Text>
-                <Text style={styles.itemTxtLugarTuristico}>{item.municipio}</Text>
             </View>
         </TouchableOpacity>
     );

@@ -5,6 +5,7 @@ import {getLugarTuristicoById} from '../services/service'
 
 const LugarTuristicoDetail = ({navigation, route}) => {
 
+    
     const [lugarTuristico, setLugarTuristico] = useState({});
     const { firestoreId, imagen } = route.params
 
@@ -23,15 +24,19 @@ const LugarTuristicoDetail = ({navigation, route}) => {
     return(
         <View>
             <Image style={styles.image} source={{ uri: imagen }} />
-            <View style={styles.contentInformation}>
-                <Text style={styles.title}>{lugarTuristico?.nombre?.stringValue}</Text>
-                <Text style={styles.title}>{lugarTuristico?.departamento?.stringValue}Bs.</Text>
+            <Text style={styles.title}>{lugarTuristico?.nombre?.stringValue}</Text>
+            <View style={{flexDirection:'row'}}>
+              <Text style={styles.description}>Departamento: </Text>
+              <Text style={styles.detail}>{lugarTuristico?.departamento?.stringValue}</Text>
             </View>
-        <Text style={styles.description}>
-            {
-            lugarTuristico?.nombre?.stringValue
-            }
-        </Text>
+            <View style={{flexDirection:'row'}}>
+              <Text style={styles.description}>Provincia: </Text>
+              <Text style={styles.detail}>{lugarTuristico?.provincia?.stringValue}</Text>
+            </View>
+            <View style={{flexDirection:'row'}}>
+              <Text style={styles.description}>Municipio: </Text>
+              <Text style={styles.detail}>{lugarTuristico?.municipio?.stringValue}</Text>
+            </View>
         </View>
     );
 };
@@ -42,29 +47,25 @@ const styles = StyleSheet.create({
       height: '50%',
       resizeMode: 'cover'
     },
-    contentInformation: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      margin: 10
-    },
     title: {
+      textAlign: 'center',
+      fontWeight:'bold',
+      margin:15,
       fontSize: 25,
       color: '#000'
     },
-    price: {
+    detail: {
+      color: '#000',
       fontSize: 15,
-      color: '#FFF',
-      backgroundColor: '#666',
       paddingHorizontal: 10,
-      paddingVertical: 5,
       borderRadius: 10
     },
     description: {
+      color: '#000',
+      fontWeight: 'bold',
       fontSize: 15,
-      textAlign: 'justify',
-      marginHorizontal: 10,
-      marginTop: 10
+      paddingHorizontal: 10,
+      borderRadius: 10
     }
   })
 
