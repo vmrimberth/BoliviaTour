@@ -24,7 +24,7 @@ const EmpresaTuristica = () => {
             let promiseImgEmpresaTuristica = [];
 
             fEmpresaTuristicaList.forEach(fEmpresaTuristica => {
-                tempEmpresaTuristicaList.push(fEmpresaTuristica.data())
+                tempEmpresaTuristicaList.push({...fEmpresaTuristica.data(), firebaseId: fEmpresaTuristica.id});
                 promiseImgEmpresaTuristica.push(storage().ref(fEmpresaTuristica.data().imagen).getDownloadURL());
             });
 

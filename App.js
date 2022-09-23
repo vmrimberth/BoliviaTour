@@ -1,4 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
 import React, { useEffect } from "react";
 import { SafeAreaView, StyleSheet, Text, View} from "react-native";
@@ -12,11 +13,13 @@ import EmpresaTuristica from "./src/screens/EmpresaTuristica";
 import EmpresaTuristicaDetail from "./src/screens/EmpresaTuristicaDetail"
 import Hotel from './src/screens/Hotel';
 import HotelDetail from './src/screens/HotelDetail'
+import LugarTuristicoMap from './src/screens/LugarTuristicoMap';
 import { navigationRef } from './src/utils/RootNavigation';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const Tab = createBottomTabNavigator();
+//const Tab = createBottomTabNavigator();
+const Tab = createMaterialBottomTabNavigator();
 
 const App = () => {
 
@@ -27,6 +30,7 @@ const App = () => {
         <Stack.Navigator>
           <Stack.Screen name="LugarTuristicoScreen" component={LugarTuristico} options={{headerShown:false}}/>
           <Stack.Screen name="LugarTuristicoDetail" component={LugarTuristicoDetail} options={{title:'Detalle de lugar turistico'}}/>
+          <Stack.Screen name="LugarTuristicoMap" component={LugarTuristicoMap} options={{title:'Ubicacion lugar turistico'}}/>
         </Stack.Navigator>
     );
   };

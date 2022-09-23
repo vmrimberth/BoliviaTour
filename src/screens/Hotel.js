@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, FlatList, View } from "react-native";
+import { Button, FlatList, View, StyleSheet } from "react-native";
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
 
@@ -24,7 +24,7 @@ const Hotel = () => {
             let promiseImgHotel = [];
 
             fHotelList.forEach(fHotel => {
-                tempHotelList.push(fHotel.data())
+                tempHotelList.push({...fHotel.data(), firebaseId:fHotel.id})
                 promiseImgHotel.push(storage().ref(fHotel.data().imagen).getDownloadURL());
             });
 
@@ -47,7 +47,7 @@ const Hotel = () => {
     }
 
     return(
-        <View>
+        <View style={styles.screenContainer}>
             <FlatList
                 style={{height:'90%'}}
                 data={hotelList}
@@ -62,5 +62,13 @@ const Hotel = () => {
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    screenContainer: {
+      flex: 1,
+      justifyContent: "center",
+      padding: 1
+    }
+  });
 
 export default Hotel;

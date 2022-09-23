@@ -7,7 +7,7 @@ const EmpresaTuristicaDetail = ({navigation, route}) => {
     const [empresaTuristica, setEmpresaTuristica] = useState({});
     const { firestoreId, imagen } = route.params
 
-    console.log('params', route.params);
+    //console.log('params', route.params);
     useEffect(() => {
         getEmpresaTuristica()
       }, [])

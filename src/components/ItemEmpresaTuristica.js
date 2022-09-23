@@ -4,6 +4,7 @@ import * as RootNavigation from '../utils/RootNavigation'
 
 const ItemEmpresaTuristica = ({item}) => {
 
+    
     const handleNavigation = () => {
         RootNavigation.navigate('EmpresaTuristicaDetail', {firestoreId:item.firebaseId, imagen:item.imagen});
     }

@@ -56,6 +56,10 @@ const FormEmpresaTuristica = (props) => {
         });
     };
 
+    const handleClose = () => {
+        onClose()
+    }
+
     return(
         <Formik
             initialValues={{nombre:'', telefono:'', correo:'', direccion:''}}
@@ -107,7 +111,10 @@ const FormEmpresaTuristica = (props) => {
                     {isLoading ? (
                         <ActivityIndicator color={"#000"} size={50}/>
                     ) : (
-                        <Button title="Guardar" onPress={handleSubmit}/>
+                        <View style={styles.containerButton}>
+                            <Button title="Guardar" onPress={handleSubmit}/>
+                            <Button title="Cancelar" onPress={handleClose}/>
+                        </View>
                     )}
                 </View>
             )}
@@ -136,6 +143,10 @@ const styles = StyleSheet.create({
         justifyContent:'space-between',
         flexDirection: 'row',
         alignItems:'flex-start'
+    },
+    containerButton: {
+        flexDirection: 'row',
+        justifyContent:'space-between'
     }
 });
 

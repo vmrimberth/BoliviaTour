@@ -103,7 +103,7 @@ const FormLugarTuristico = (props) => {
 
                     <Text style={styles.labelInput}>Imagen:</Text>
                     <View style={styles.containerImagen}>
-                        <View style={{width:'100%' }}>
+                        <View style={{width:'75%' }}>
                             <TextInput 
                             style={styles.input} 
                             value={fileName} 
@@ -155,7 +155,8 @@ const styles = StyleSheet.create({
     },
     containerImagen:{
         justifyContent:'space-between',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        alignItems:'flex-start'
     },
     containerButton: {
         flexDirection: 'row',

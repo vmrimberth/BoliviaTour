@@ -1,5 +1,6 @@
 import React from "react";
 import { Text, StyleSheet, View, Image, TouchableOpacity } from "react-native";
+import { Button } from "react-native-paper";
 import * as RootNavigation from '../utils/RootNavigation'
 
 const ItemLugarTuristico = ({item}) => {
@@ -8,17 +9,26 @@ const ItemLugarTuristico = ({item}) => {
         RootNavigation.navigate('LugarTuristicoDetail', {firestoreId:item.firebaseId, imagen:item.imagen});
     };
 
+    const handleNavigationUbicacion = () => {
+        //console.log("item: ", item)
+        RootNavigation.navigate('LugarTuristicoMap', {ubicacion:item.ubicacion});
+    };
+
     return (
-        <TouchableOpacity style={styles.containerItem} onPress={handleNavigation}>
-            <View style={styles.imgContainer}>
+        <View style={styles.containerItem} >
+            <TouchableOpacity style={styles.imgContainer} onPress={handleNavigation}>
                 <Image source={{uri:item.imagen}} style={{width:100, height:100}}></Image>
-            </View>
+            </TouchableOpacity>
             
             <View style={styles.descriptionContainer}>
-                <Text style={styles.itemTxtLugarTuristico}>{item.nombre}</Text>
-                <Text style={styles.itemTxtLugarTuristico}>{item.departamento}</Text>
+                <View>
+                    <Text style={styles.itemTxtLugarTuristico}>{item.nombre}</Text>
+                    <Text style={styles.itemTxtLugarTuristico}>{item.departamento}</Text>
+                
+                    <Button style={{backgroundColor:'#1e90ff', color:"#841584"}} title="Ubicacion" onPress={handleNavigationUbicacion}/>
+                </View>
             </View>
-        </TouchableOpacity>
+        </View>
     );
 };
 
@@ -49,6 +59,7 @@ const styles = StyleSheet.create({
         width:'30%'
     },
     descriptionContainer:{
+        flexDirection: 'column',
         width:'70%'
     }
 });

@@ -1,9 +1,8 @@
 //import React from "react";
 import React, { useEffect, useState } from "react";
-import { View, FlatList, Image, Button, TouchableOpacity, StyleSheet, Text } from "react-native";
+import { View, FlatList, Button, StyleSheet } from "react-native";
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
-import LinearGradient from "react-native-linear-gradient";
 
 import ItemLugarTuristico from "../components/ItemLugarTuristico";
 import ModalLugarTuristico from "../components/ModalLugarTuristico";
@@ -29,7 +28,7 @@ const LugarTuristico = (props) => {
             let tempLugarTuristicoList = [];
             let promiseImages = [];
             fLugarTuristicoList.forEach(fLugarTuristico => {
-                //console.log('Lugar Turistico: ', fLugarTuristico.data())
+                //console.log('Lugar Turistico: ', fLugarTuristico.id)
                 tempLugarTuristicoList.push({...fLugarTuristico.data(), firebaseId: fLugarTuristico.id});
                 promiseImages.push(storage().ref(fLugarTuristico.data().imagen).getDownloadURL());
             });
@@ -50,19 +49,6 @@ const LugarTuristico = (props) => {
         setIsVisible(false);
     }
 
-    TouchableOpacity.defaultProps = { activeOpacity: 0.8 };
-
-    const AppButton = ({ onPress, title }) => (
-        <TouchableOpacity onPress={onPress}>
-            <LinearGradient
-            colors={["#004d40", "#009688"]}
-            style={styles.appButtonContainer}
-            >
-            <Text style={styles.appButtonText}>{title}</Text>
-            </LinearGradient>
-        </TouchableOpacity>
-      );
-
     return(
         <View style={styles.screenContainer}>
             <FlatList 
@@ -72,7 +58,7 @@ const LugarTuristico = (props) => {
                 keyExtractor={item => item.id}
                 />
             
-            <AppButton title="Agregar" size="sm" backgroundColor="#007bff" onPress={handleModal}/>
+            <Button style={{height:'10%'}} title="Agregar" onPress={handleModal}/>
             {isVisible && 
                 <ModalLugarTuristico onClose={handleOnClose}/>
             }
