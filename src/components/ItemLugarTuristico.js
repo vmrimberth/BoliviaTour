@@ -1,7 +1,9 @@
 import React from "react";
-import { Text, StyleSheet, View, Image, TouchableOpacity } from "react-native";
-import { Button } from "react-native-paper";
+import { Text, View, Image } from "react-native";
 import * as RootNavigation from '../utils/RootNavigation'
+import { IconButton } from "@react-native-material/core";
+import Icon from 'react-native-vector-icons/Ionicons';
+import ItemStyle from "./Styles";
 
 const ItemLugarTuristico = ({item}) => {
     //console.log("item: ", item)
@@ -15,53 +17,25 @@ const ItemLugarTuristico = ({item}) => {
     };
 
     return (
-        <View style={styles.containerItem} >
-            <TouchableOpacity style={styles.imgContainer} onPress={handleNavigation}>
+        <View style={ItemStyle.container} >
+            <View style={ItemStyle.img}>
                 <Image source={{uri:item.imagen}} style={{width:100, height:100}}></Image>
-            </TouchableOpacity>
+            </View>
             
-            <View style={styles.descriptionContainer}>
+            <View style={ItemStyle.left}>
                 <View>
-                    <Text style={styles.itemTxtLugarTuristico}>{item.nombre}</Text>
-                    <Text style={styles.itemTxtLugarTuristico}>{item.departamento}</Text>
-                
-                    <Button style={{backgroundColor:'#1e90ff', color:"#841584"}} title="Ubicacion" onPress={handleNavigationUbicacion}/>
+                    <Text style={ItemStyle.txtName}>{item.nombre}</Text>
+                    <Text style={ItemStyle.txtDesc}>{item.departamento}</Text>
+                </View>
+                <View style={ItemStyle.button}>
+                    <IconButton  variant='solid' colorScheme="indigo" icon={props => <Icon name="information-circle-outline" {...props} />} onPress={handleNavigation}/>
+                    <IconButton  variant='solid' colorScheme="indigo" icon={props => <Icon name="location-outline" {...props} />} onPress={handleNavigationUbicacion}/>
+                    <IconButton  variant='solid' colorScheme="indigo" icon={props => <Icon name="heart-outline" {...props} />}/>
+                    <IconButton  variant='solid' colorScheme="indigo" icon={props => <Icon name="images-outline" {...props} />}/>
                 </View>
             </View>
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    input:{
-        height:40,
-        margin:13,
-        borderWidth:1,
-        padding:10
-    },
-    labelInput:{
-        fontWeight:'bold'
-    },
-    containerItem:{
-        flexDirection: 'row',
-        padding:10,
-        backgroundColor:'white',
-        margin:10,
-        elevation:5,
-        borderRadius:5
-    },
-    itemTxtLugarTuristico:{
-        fontSize:14,
-        fontWeight:'bold',
-        color:'#000'
-    },
-    imgContainer:{
-        width:'30%'
-    },
-    descriptionContainer:{
-        flexDirection: 'column',
-        width:'70%'
-    }
-});
 
 export default ItemLugarTuristico;

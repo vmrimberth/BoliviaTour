@@ -1,46 +1,35 @@
 import React from "react";
-import { StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
+import { View, Image, Text } from "react-native";
+import { IconButton } from "@react-native-material/core";
+import Icon from 'react-native-vector-icons/Ionicons';
 import * as RootNavigation from '../utils/RootNavigation'
+import ItemStyle from "./Styles";
 
 const ItemEmpresaTuristica = ({item}) => {
 
-    
     const handleNavigation = () => {
         RootNavigation.navigate('EmpresaTuristicaDetail', {firestoreId:item.firebaseId, imagen:item.imagen});
-    }
+    };
+
     return(
-        <TouchableOpacity style={styles.containerItem} onPress={handleNavigation}>
-            <View style={styles.imgContainer}>
+        <View style={ItemStyle.container}>
+            <View style={ItemStyle.img}>
                 <Image source={{uri:item.imagen}} style={{width:100, height:100}}></Image>
             </View>
-            <View style={styles.descriptionContainer}>
-                <Text style={styles.itemTxtEmpresaTuristica}>{item.nombre}</Text>
-                <Text style={styles.itemTxtEmpresaTuristica}>{item.direccion}</Text>
+            <View style={ItemStyle.left}>
+                <View>
+                    <Text style={ItemStyle.txtName}>{item.nombre}</Text>
+                    <Text style={ItemStyle.txtDesc}>{item.direccion}</Text>
+                </View>
+                <View style={ItemStyle.button}>
+                    <IconButton  variant='solid' colorScheme="indigo" icon={props => <Icon name="information-circle-outline" {...props} />} onPress={handleNavigation}/>
+                    <IconButton  variant='solid' colorScheme="indigo" icon={props => <Icon name="heart-outline" {...props} />}/>
+                    <IconButton  variant='solid' colorScheme="indigo" icon={props => <Icon name="logo-whatsapp" {...props} />}/>
+                    <IconButton  variant='solid' colorScheme="indigo" icon={props => <Icon name="logo-facebook" {...props} />}/>
+                </View>
             </View>
-        </TouchableOpacity>
+        </View>
     );
 };
-
-const styles = StyleSheet.create({
-    containerItem: {
-        flexDirection: 'row',
-        padding: 10,
-        backgroundColor: 'white',
-        margin: 10,
-        elevation: 5,
-        borderRadius:5
-    },
-    itemTxtEmpresaTuristica: {
-        fontSize: 14,
-        fontWeight: 'bold',
-        color: '#000'
-    },
-    imgContainer: {
-        width: '30%'
-    },
-    descriptionContainer: {
-        width: '70%'
-    }
-});
 
 export default ItemEmpresaTuristica
