@@ -1,9 +1,11 @@
 import React from "react";
 import { Text, View, Image } from "react-native";
-import * as RootNavigation from '../utils/RootNavigation'
 import { IconButton } from "@react-native-material/core";
+import * as RootNavigation from '../utils/RootNavigation'
 import Icon from 'react-native-vector-icons/Ionicons';
 import ItemStyle from "./Styles";
+import OptionsMenu from "react-native-option-menu";
+
 
 const ItemLugarTuristico = ({item}) => {
     //console.log("item: ", item)
@@ -16,6 +18,16 @@ const ItemLugarTuristico = ({item}) => {
         RootNavigation.navigate('LugarTuristicoMap', {ubicacion:item.ubicacion});
     };
 
+    const handleEdit = () => {
+        console.log('Editar')
+    }
+
+    const handleDelete = () => {
+        console.log('Eliminar')
+    }
+
+    const myIcon = (<Icon name="ellipsis-vertical" size={30} color="#000" />)
+
     return (
         <View style={ItemStyle.container} >
             <View style={ItemStyle.img}>
@@ -23,9 +35,18 @@ const ItemLugarTuristico = ({item}) => {
             </View>
             
             <View style={ItemStyle.left}>
-                <View>
-                    <Text style={ItemStyle.txtName}>{item.nombre}</Text>
-                    <Text style={ItemStyle.txtDesc}>{item.departamento}</Text>
+                <View  style={{flexDirection: 'row'}}>
+                    <View style={{flex:1}}>
+                        <Text style={ItemStyle.txtName}>{item.nombre}</Text>
+                        <Text style={ItemStyle.txtDesc}>{item.departamento}</Text>
+                    </View>
+                    <View style={{flex:0}}>
+                        <OptionsMenu
+                            customButton={myIcon}
+                            destructiveIndex={1}
+                            options={["Modificar", "Eliminar"]}
+                            actions={[handleEdit, handleDelete]}/>
+                    </View>
                 </View>
                 <View style={ItemStyle.button}>
                     <IconButton  variant='solid' colorScheme="indigo" icon={props => <Icon name="information-circle-outline" {...props} />} onPress={handleNavigation}/>

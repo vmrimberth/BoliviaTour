@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Button, FlatList, View, StyleSheet } from "react-native";
+import { FlatList, View, StyleSheet } from "react-native";
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
+
+import {FAB} from 'react-native-elements'
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import ItemEmpresaTuristica from "../components/ItemEmpresaTuristica";
 import ModalEmpresaTuristica from "../components/ModalEmpresaTuristica";
@@ -54,7 +57,16 @@ const EmpresaTuristica = () => {
                 renderItem={ItemEmpresaTuristica}
                 keyExtractor={item => item.id}
             />
-            <Button style={{height:'10%'}} title="Agregar" onPress={handleModal}/>
+
+            <FAB
+                placement='right'
+                size='large'
+                upperCase={true}
+                icon={<Icon name = { 'add' } size = { 25 } color = { '#f0edf6' } />}
+                buttonStyle={{backgroundColor:'#f4511e'}}
+                onPress={handleModal}
+            />
+
             {
                 isVisible && 
                 <ModalEmpresaTuristica onClose={handleOnClose}/>

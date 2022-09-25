@@ -28,9 +28,33 @@ const App = () => {
   const LugarTuristicoStackScreen = () => {
     return (
         <Stack.Navigator>
-          <Stack.Screen name="LugarTuristicoScreen" component={LugarTuristico} options={{headerShown:false}}/>
-          <Stack.Screen name="LugarTuristicoDetail" component={LugarTuristicoDetail} options={{title:'Detalle de lugar turistico'}}/>
-          <Stack.Screen name="LugarTuristicoMap" component={LugarTuristicoMap} options={{title:'Ubicacion lugar turistico'}}/>
+          <Stack.Screen name="LugarTuristicoScreen" component={LugarTuristico} options={{
+            title: 'Lugar Turistico',
+            headerStyle: {
+              backgroundColor: '#f4511e',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },}}/>
+          <Stack.Screen name="LugarTuristicoDetail" component={LugarTuristicoDetail} options={{
+            title:'Detalle de lugar turistico',
+            headerStyle: {
+              backgroundColor: '#f4511e',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },}}/>
+          <Stack.Screen name="LugarTuristicoMap" component={LugarTuristicoMap} options={{
+            title:'Ubicacion lugar turistico',
+            headerStyle: {
+              backgroundColor: '#f4511e',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },}}/>
         </Stack.Navigator>
     );
   };
@@ -38,8 +62,24 @@ const App = () => {
   const EmpresaTuristicaStackScreen = () => {
     return (
       <Stack.Navigator>
-        <Stack.Screen name='EmpresaTuristicaScreen' component={EmpresaTuristica} options={{headerShown:false}}/>
-        <Stack.Screen name='EmpresaTuristicaDetail' component={EmpresaTuristicaDetail} options={{title:'Detalle de empresa turistica'}}/>
+        <Stack.Screen name='EmpresaTuristicaScreen' component={EmpresaTuristica} options={{
+          title:'Empresa Turistica',
+          headerStyle: {
+            backgroundColor: '#f4511e',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },}}/>
+        <Stack.Screen name='EmpresaTuristicaDetail' component={EmpresaTuristicaDetail} options={{
+          title:'Detalle de empresa turistica',
+          headerStyle: {
+            backgroundColor: '#f4511e',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },}}/>
       </Stack.Navigator>
     );
   };
@@ -47,30 +87,50 @@ const App = () => {
   const HotelStackScreen = () => {
     return (
       <Stack.Navigator>
-        <Stack.Screen name='HotelScreen' component={Hotel} options={{headerShown:false}}/>
-        <Stack.Screen name='HotelDetail' component={HotelDetail} options={{title:'Detalle de hotel'}}/>
+        <Stack.Screen name='HotelScreen' component={Hotel} options={{
+          title: 'Hotel',
+          headerStyle: {
+            backgroundColor: '#f4511e',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },}}/>
+        <Stack.Screen name='HotelDetail' component={HotelDetail} options={{
+          title:'Detalle de hotel',
+          headerStyle: {
+            backgroundColor: '#f4511e',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },}}/>
       </Stack.Navigator>
     );
   };
 
   const createScreenOptions = ({route}) =>{
     return{
-      tabBarIcon: ({focused, size, color}) => {      
+      tabBarIcon: ({focused, color}) => {      
+        
         let iconName = '';
+        let iconSize = 20;
         switch (route.name) {
           case "LugarTuristico":
             iconName = focused ? 'earth' : 'earth-outline';
+            iconSize = focused ? 23 : 20;
             break;
           case "EmpresaTuristica":
             iconName = focused ? 'list-circle' : 'list-circle-outline';
+            iconSize = focused ? 23 : 20;
             break;
           case 'Hotel':
             iconName = focused ? 'business' : 'business-outline';
+            iconSize = focused ? 23 : 20;
             break;
         }
-        return(<Icon name = { iconName } size = { size } color = { color } />)
-      },
-      headerShown:false
+        return(<Icon name = { iconName } size = { iconSize } color = { color } />)
+      }
     };
   };
 
@@ -78,6 +138,10 @@ const App = () => {
     <NavigationContainer ref={navigationRef}>
       <Tab.Navigator
       screenOptions={createScreenOptions}
+      initialRouteName="LugarTuristico"
+      activeColor="#f0edf6"
+      inactiveColor="#ecf0f1"
+      barStyle={{ backgroundColor: '#f4511e' }}
       >
         <Tab.Screen name="LugarTuristico" component={LugarTuristicoStackScreen} />
         <Tab.Screen name="EmpresaTuristica" component={EmpresaTuristicaStackScreen} />
