@@ -19,11 +19,11 @@ const ItemLugarTuristico = ({item}) => {
     };
 
     const handleEdit = () => {
-        console.log('Editar')
+        return(console.log('Modificar'))
     }
 
     const handleDelete = () => {
-        console.log('Eliminar')
+        return (console.log('Eliminar'))
     }
 
     const myIcon = (<Icon name="ellipsis-vertical" size={30} color="#000" />)
@@ -44,15 +44,15 @@ const ItemLugarTuristico = ({item}) => {
                         <OptionsMenu
                             customButton={myIcon}
                             destructiveIndex={1}
-                            options={["Modificar", "Eliminar"]}
+                            options={["Modificar", "Eliminar", "Cancelar"]}
                             actions={[handleEdit, handleDelete]}/>
                     </View>
                 </View>
                 <View style={ItemStyle.button}>
-                    <IconButton  variant='solid' colorScheme="indigo" icon={props => <Icon name="information-circle-outline" {...props} />} onPress={handleNavigation}/>
-                    <IconButton  variant='solid' colorScheme="indigo" icon={props => <Icon name="location-outline" {...props} />} onPress={handleNavigationUbicacion}/>
-                    <IconButton  variant='solid' colorScheme="indigo" icon={props => <Icon name="heart-outline" {...props} />}/>
-                    <IconButton  variant='solid' colorScheme="indigo" icon={props => <Icon name="images-outline" {...props} />}/>
+                    <IconButton  icon={<Icon name="information-circle-outline" size={25} color={'#006AFF'} />} onPress={handleNavigation}/>
+                    <IconButton  icon={<Icon name="location-outline" size={25} color={'#1DB954'} />} onPress={handleNavigationUbicacion}/>
+                    <IconButton  icon={<Icon name="heart-outline" size={25} color={'#E60023'} />}/>
+                    <IconButton  icon={<Icon name="images-outline" size={25} color={'#6666FF'} />}/>
                 </View>
             </View>
         </View>

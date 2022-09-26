@@ -37,15 +37,15 @@ const ItemHotel = ({item}) => {
                         <OptionsMenu
                             customButton={myIcon}
                             destructiveIndex={1}
-                            options={["Modificar", "Eliminar"]}
+                            options={["Modificar", "Eliminar", "Cancelar"]}
                             actions={[handleEdit, handleDelete]}/>
                     </View>
                 </View>
                 <View style={ItemStyle.button}>
-                    <IconButton  variant='solid' colorScheme="indigo" icon={props => <Icon name="information-circle-outline" {...props} />} onPress={handleNavigation}/>
-                    <IconButton  variant='solid' colorScheme="indigo" icon={props => <Icon name="heart-outline" {...props} />}/>
-                    <IconButton  variant='solid' colorScheme="indigo" icon={props => <Icon name="logo-whatsapp" {...props} />}/>
-                    <IconButton  variant='solid' colorScheme="indigo" icon={props => <Icon name="logo-facebook" {...props} />}/>
+                    <IconButton  icon={<Icon name="information-circle-outline" size={25} color={'#006AFF'} />} onPress={handleNavigation}/>
+                    <IconButton  icon={<Icon name="heart-outline" size={25} color={'#E60023'} />}/>
+                    <IconButton  icon={<Icon name="logo-whatsapp" size={25} color={'#25D366'} />}/>
+                    <IconButton  icon={<Icon name="logo-facebook" size={25} color={'#4267B2'} />}/>
                 </View>
             </View>
         </View>

@@ -37,7 +37,7 @@ const ItemEmpresaTuristica = ({item}) => {
                         <OptionsMenu
                             customButton={myIcon}
                             destructiveIndex={1}
-                            options={["Modificar", "Eliminar"]}
+                            options={["Modificar", "Eliminar", "Cancelar"]}
                             actions={[handleEdit, handleDelete]}/>
                     </View>
                 </View>
