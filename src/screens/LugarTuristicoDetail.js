@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
 import {getLugarTuristicoById} from '../services/service'
-
+import DetailStyle from "./DetailStyle";
 
 const LugarTuristicoDetail = ({navigation, route}) => {
 
@@ -23,51 +23,24 @@ const LugarTuristicoDetail = ({navigation, route}) => {
 
     return(
         <View>
-            <Image style={styles.image} source={{ uri: imagen }} />
-            <Text style={styles.title}>{lugarTuristico?.nombre?.stringValue}</Text>
-            <View style={{flexDirection:'row'}}>
-              <Text style={styles.description}>Departamento: </Text>
-              <Text style={styles.detail}>{lugarTuristico?.departamento?.stringValue}</Text>
-            </View>
-            <View style={{flexDirection:'row'}}>
-              <Text style={styles.description}>Provincia: </Text>
-              <Text style={styles.detail}>{lugarTuristico?.provincia?.stringValue}</Text>
-            </View>
-            <View style={{flexDirection:'row'}}>
-              <Text style={styles.description}>Municipio: </Text>
-              <Text style={styles.detail}>{lugarTuristico?.municipio?.stringValue}</Text>
+            <Image style={DetailStyle.image} source={{ uri: imagen }} />
+            <View style={DetailStyle.container}>
+              <Text style={DetailStyle.title}>{lugarTuristico?.nombre?.stringValue}</Text>
+              <View style={{flexDirection:'row'}}>
+                <Text style={DetailStyle.description}>Departamento: </Text>
+                <Text style={DetailStyle.detail}>{lugarTuristico?.departamento?.stringValue}</Text>
+              </View>
+              <View style={{flexDirection:'row'}}>
+                <Text style={DetailStyle.description}>Provincia: </Text>
+                <Text style={DetailStyle.detail}>{lugarTuristico?.provincia?.stringValue}</Text>
+              </View>
+              <View style={{flexDirection:'row'}}>
+                <Text style={DetailStyle.description}>Municipio: </Text>
+                <Text style={DetailStyle.detail}>{lugarTuristico?.municipio?.stringValue}</Text>
+              </View>
             </View>
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    image: {
-      width: '100%',
-      height: '50%',
-      resizeMode: 'cover'
-    },
-    title: {
-      textAlign: 'center',
-      fontWeight:'bold',
-      margin:15,
-      fontSize: 25,
-      color: '#000'
-    },
-    detail: {
-      color: '#000',
-      fontSize: 15,
-      paddingHorizontal: 10,
-      borderRadius: 10
-    },
-    description: {
-      color: '#000',
-      fontWeight: 'bold',
-      fontSize: 15,
-      paddingHorizontal: 10,
-      borderRadius: 10
-    }
-  })
-
 
 export default LugarTuristicoDetail;

@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import {launchImageLibrary} from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
+import FormStyle from "./FormStyle";
 
 const FormEmpresaTuristica = (props) => {
 
@@ -67,42 +68,43 @@ const FormEmpresaTuristica = (props) => {
             validationSchema={FormEmpresaTuristicaSchema}
         >
             {({handleChange, handleSubmit, values, errors}) => (
-                <View style={styles.containerForm}>
-                    <Text style={styles.labelInput}>Nombre:</Text>
-                    <TextInput style={styles.input} value={values.nombre} onChangeText={handleChange('nombre')} placeholder="Nombre..."/>
+                <View style={FormStyle.containerForm}>
+                    <Text style={FormStyle.labelInput}>Nombre:</Text>
+                    <TextInput style={FormStyle.input} value={values.nombre} onChangeText={handleChange('nombre')} placeholder="Nombre..."/>
                     {
                         errors.nombre && (
-                        <Text style={styles.messageError}>{errors.nombre}</Text>
+                        <Text style={FormStyle.messageError}>{errors.nombre}</Text>
                     )}
-                    <Text style={styles.labelInput}>Telefono:</Text>
-                    <TextInput style={styles.input} value={values.telefono} onChangeText={handleChange('telefono')} placeholder="Telefono..."/>
+                    <Text style={FormStyle.labelInput}>Telefono:</Text>
+                    <TextInput style={FormStyle.input} value={values.telefono} onChangeText={handleChange('telefono')} placeholder="Telefono..." keyboardType="numeric"/>
                     {
                         errors.telefono && (
-                        <Text style={styles.messageError}>{errors.telefono}</Text>
+                        <Text style={FormStyle.messageError}>{errors.telefono}</Text>
                     )}
-                    <Text style={styles.labelInput}>Correo:</Text>
-                    <TextInput style={styles.input} value={values.correo} onChangeText={handleChange('correo')} placeholder="Correo..."/>
+                    <Text style={FormStyle.labelInput}>Correo:</Text>
+                    <TextInput style={FormStyle.input} value={values.correo} onChangeText={handleChange('correo')} placeholder="Correo..." type='email' keyboardType="email-address"/>
                     {
                         errors.correo && (
-                        <Text style={styles.messageError}>{errors.correo}</Text>
+                        <Text style={FormStyle.messageError}>{errors.correo}</Text>
                     )}
-                    <Text style={styles.labelInput}>Direccion:</Text>
-                    <TextInput style={styles.input} value={values.direccion} onChangeText={handleChange('direccion')} placeholder="Direccion..."/>
+                    <Text style={FormStyle.labelInput}>Direccion:</Text>
+                    <TextInput style={FormStyle.input} value={values.direccion} onChangeText={handleChange('direccion')} placeholder="Direccion..."/>
                     {
                         errors.direccion && (
-                        <Text style={styles.messageError}>{errors.direccion}</Text>
+                        <Text style={FormStyle.messageError}>{errors.direccion}</Text>
                     )}
 
-                    <Text style={styles.labelInput}>Imagen:</Text>
-                    <View style={styles.containerImagen}>
+                    <Text style={FormStyle.labelInput}>Imagen:</Text>
+                    <View style={FormStyle.containerImagen}>
                         <View style={{width:'75%' }}>
                             <TextInput 
-                            style={styles.input} 
+                            style={FormStyle.input} 
                             value={fileName} 
                             placeholder="Imagen..."
                             />
                         </View>
                         <Button 
+                        color='#f56436'
                         style={{with:'20%'}} 
                         onPress={handleGallery} 
                         title="Imagen" 
@@ -111,9 +113,9 @@ const FormEmpresaTuristica = (props) => {
                     {isLoading ? (
                         <ActivityIndicator color={"#000"} size={50}/>
                     ) : (
-                        <View style={styles.containerButton}>
-                            <Button title="Guardar" onPress={handleSubmit}/>
-                            <Button title="Cancelar" onPress={handleClose}/>
+                        <View style={FormStyle.containerButton}>
+                            <Button title="Guardar" color='#f56436' onPress={handleSubmit}/>
+                            <Button title="Cancelar" color='#f56436' onPress={handleClose}/>
                         </View>
                     )}
                 </View>
@@ -121,33 +123,5 @@ const FormEmpresaTuristica = (props) => {
         </Formik>
     );
 }
-
-const styles = StyleSheet.create({
-    input:{
-        borderWidth:1,
-        borderRadius: 5,
-        paddingLeft:10,
-        marginBottom: 10
-    },
-    labelInput:{
-        fontWeight:'bold'
-    },
-    containerForm: {
-        padding:15
-    },
-    messageError: {
-        color: 'red',
-        fontSize:10
-    },
-    containerImagen:{
-        justifyContent:'space-between',
-        flexDirection: 'row',
-        alignItems:'flex-start'
-    },
-    containerButton: {
-        flexDirection: 'row',
-        justifyContent:'space-between'
-    }
-});
 
 export default FormEmpresaTuristica;

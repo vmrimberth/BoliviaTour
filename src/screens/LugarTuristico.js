@@ -1,6 +1,6 @@
 //import React from "react";
 import React, { useEffect, useState } from "react";
-import { View, FlatList, Button, StyleSheet } from "react-native";
+import { View, FlatList, StatusBar, StyleSheet } from "react-native";
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
 
@@ -54,6 +54,10 @@ const LugarTuristico = (props) => {
 
     return(
         <View style={styles.screenContainer}>
+            <StatusBar
+                animated={true}
+                backgroundColor="#f4511e"
+                 />
             <FlatList 
                 style={{height:'90%'}} 
                 data={lugarTuristicoList} 
