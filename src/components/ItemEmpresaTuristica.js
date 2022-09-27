@@ -5,6 +5,7 @@ import * as RootNavigation from '../utils/RootNavigation'
 import Icon from 'react-native-vector-icons/Ionicons';
 import ItemStyle from "./Styles";
 import OptionsMenu from "react-native-option-menu";
+import analytics from '@react-native-firebase/analytics';
 
 const ItemEmpresaTuristica = ({item}) => {
 
@@ -19,6 +20,21 @@ const ItemEmpresaTuristica = ({item}) => {
     const handleDelete = () => {
         console.log('Eliminar')
     }
+
+    const handleFacebook = async () => {
+        await analytics.logLogin({
+            method:'call_facebook'
+        });
+    };
+
+    const handleWhatsapp = async () => {
+        await analytics.logEvent('basket', {
+            id: 3745092,
+            item: 'mens grey t-shirt',
+            description: ['round neck', 'long sleeved'],
+            size: 'L',
+          });
+    };
 
     const myIcon = (<Icon name="ellipsis-vertical" size={30} color="#000" />)
 
@@ -44,8 +60,8 @@ const ItemEmpresaTuristica = ({item}) => {
                 <View style={ItemStyle.button}>
                     <IconButton  icon={<Icon name="information-circle-outline" size={25} color={'#006AFF'} />} onPress={handleNavigation}/>
                     <IconButton  icon={<Icon name="heart-outline" size={25} color={'#E60023'} />}/>
-                    <IconButton  icon={<Icon name="logo-whatsapp" size={25} color={'#25D366'} />}/>
-                    <IconButton  icon={<Icon name="logo-facebook" size={25} color={'#4267B2'} />}/>
+                    <IconButton  icon={<Icon name="logo-whatsapp" size={25} color={'#25D366'} />} onPress={handleWhatsapp}/>
+                    <IconButton  icon={<Icon name="logo-facebook" size={25} color={'#4267B2'} />} onPress={handleFacebook}/>
                 </View>
             </View>
         </View>
