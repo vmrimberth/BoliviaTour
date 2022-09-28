@@ -16,6 +16,7 @@ const LugarTuristico = (props) => {
 
     const [lugarTuristicoList, setLugarTuristicoList] = useState([]);
     const [isVisible, setIsVisible] = useState(false);
+    const [sizeFlat, setSizeFlat] = useState(0);
 
     useEffect(() => {
        getLugarTuristicoList();
@@ -74,7 +75,7 @@ const LugarTuristico = (props) => {
                 onPress={handleModal}
             />
             {isVisible && 
-                <ModalLugarTuristico onClose={handleOnClose}/>
+                <ModalLugarTuristico onClose={handleOnClose} size_lista={ItemLugarTuristico.length}/>
             }
         </View>
     );

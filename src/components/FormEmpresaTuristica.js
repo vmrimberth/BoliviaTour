@@ -44,17 +44,25 @@ const FormEmpresaTuristica = (props) => {
     };
 
     const handleFirestore = (values) => {
-        firestore().collection('empresa_turistica').add({
-            ...values,
-            imagen: fileName
-        }).then(response => {
-            Keyboard.dismiss();
-            setIsLoading(false);
-            onClose();
-            console.log('Guardado empresa turistica...');
-        }).catch(error => {
-            console.log('error', error);
-        });
+        var _col = 0;
+        firestore()
+        .collection('empresa_turistica')
+        .get()
+        .then(querySnapshot => {
+            _col = querySnapshot.size+1;
+            firestore().collection('empresa_turistica').add({
+                ...values,
+                imagen: fileName,
+                id:_col
+            }).then(response => {
+                Keyboard.dismiss();
+                setIsLoading(false);
+                onClose();
+                console.log('Guardado empresa turistica...');
+            }).catch(error => {
+                console.log('error', error);
+            });
+        }).catch(e => {console.log(e)});
     };
 
     const handleClose = () => {

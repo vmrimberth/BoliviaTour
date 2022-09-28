@@ -1,11 +1,11 @@
 import React from "react";
-import { View, Image, Text } from "react-native";
+import { View, Image, Text, Linking } from "react-native";
 import { IconButton } from "@react-native-material/core";
 import * as RootNavigation from '../utils/RootNavigation'
 import Icon from 'react-native-vector-icons/Ionicons';
 import ItemStyle from "./Styles";
 import OptionsMenu from "react-native-option-menu";
-import analytics from '@react-native-firebase/analytics';
+import firestore from '@react-native-firebase/firestore';
 
 const ItemEmpresaTuristica = ({item}) => {
 
@@ -17,24 +17,24 @@ const ItemEmpresaTuristica = ({item}) => {
         console.log('Editar')
     }
 
-    const handleDelete = () => {
-        console.log('Eliminar')
+    const handleDelete = async () => {
+        const readDoc = await firestore()
+        .collection('empresa_turistica')
+        .doc(item.firebaseId)
+        .delete()
+        .then( data => { alert("Empresa Turistica Eliminada") })
+        .catch(e => { console.log(e) });
     }
 
-    const handleFacebook = async () => {
-        await analytics.logLogin({
-            method:'call_facebook'
-        });
-    };
+    const handelWhatsapp = async () => {
+        await Linking.openURL('https://wa.me/+591',item.telefono,'?text=Mas informacion por favor');
+    }
 
-    const handleWhatsapp = async () => {
-        await analytics.logEvent('basket', {
-            id: 3745092,
-            item: 'mens grey t-shirt',
-            description: ['round neck', 'long sleeved'],
-            size: 'L',
-          });
-    };
+    const handelFacebook = async () => {
+        await Linking.openURL('fb://page/PAGE_ID');
+        //Linking.openURL('http://instagram.com/_u/USER_NAME');
+        //Linking.openURL('http://instagram.com/_p/PICTURE');
+    }
 
     const myIcon = (<Icon name="ellipsis-vertical" size={30} color="#000" />)
 
@@ -60,8 +60,8 @@ const ItemEmpresaTuristica = ({item}) => {
                 <View style={ItemStyle.button}>
                     <IconButton  icon={<Icon name="information-circle-outline" size={25} color={'#006AFF'} />} onPress={handleNavigation}/>
                     <IconButton  icon={<Icon name="heart-outline" size={25} color={'#E60023'} />}/>
-                    <IconButton  icon={<Icon name="logo-whatsapp" size={25} color={'#25D366'} />} onPress={handleWhatsapp}/>
-                    <IconButton  icon={<Icon name="logo-facebook" size={25} color={'#4267B2'} />} onPress={handleFacebook}/>
+                    <IconButton  icon={<Icon name="logo-whatsapp" size={25} color={'#25D366'} />} onPress={handelWhatsapp}/>
+                    <IconButton  icon={<Icon name="logo-facebook" size={25} color={'#4267B2'} />} onPress={handelFacebook}/>
                 </View>
             </View>
         </View>

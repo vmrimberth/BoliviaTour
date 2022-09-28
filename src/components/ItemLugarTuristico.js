@@ -5,7 +5,7 @@ import * as RootNavigation from '../utils/RootNavigation'
 import Icon from 'react-native-vector-icons/Ionicons';
 import ItemStyle from "./Styles";
 import OptionsMenu from "react-native-option-menu";
-
+import firestore from '@react-native-firebase/firestore';
 
 const ItemLugarTuristico = ({item}) => {
     //console.log("item: ", item)
@@ -14,7 +14,7 @@ const ItemLugarTuristico = ({item}) => {
     };
 
     const handleNavigationUbicacion = () => {
-        //console.log("item: ", item)
+        console.log("item: ", item)
         RootNavigation.navigate('LugarTuristicoMap', {ubicacion:item.ubicacion});
     };
 
@@ -22,8 +22,13 @@ const ItemLugarTuristico = ({item}) => {
         return(console.log('Modificar'))
     }
 
-    const handleDelete = () => {
-        return (console.log('Eliminar'))
+    const handleDelete = async () => {
+        const readDoc = await firestore()
+        .collection('lugar_turistico')
+        .doc(item.firebaseId)
+        .delete()
+        .then( data => { alert("Lugar Turistico Eliminado") })
+        .catch(e => { console.log(e) });
     }
 
     const myIcon = (<Icon name="ellipsis-vertical" size={30} color="#000" />)

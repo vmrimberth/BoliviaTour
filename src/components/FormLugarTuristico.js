@@ -8,7 +8,7 @@ import firestore from '@react-native-firebase/firestore';
 import FormStyle from "./FormStyle";
 
 const FormLugarTuristico = (props) => {
-    
+    //console.log(props)
     const [referenceStorage, setReferenceStorage] = useState();
     const [fileName, setFileName] = useState();
     const [pathFile, setPathFile] = useState();
@@ -37,7 +37,7 @@ const FormLugarTuristico = (props) => {
     };
 
     const handleForm = (values) => {
-        //values => console.log('values ',values)
+        //console.log('values ',values)
         setIsLoading(true);
         referenceStorage.putFile(pathFile).then(response => {
             console.log('exitoso')
@@ -48,21 +48,31 @@ const FormLugarTuristico = (props) => {
     }
 
     const handleFirestore = (values) => {
+        var _col = 0;
         firestore()
         .collection('lugar_turistico')
-        .add({
-            ...values, 
-            imagen: fileName
-        })
-        .then(response => {
-            Keyboard.dismiss();
-            setIsLoading(false);
-            onClose();
-            console.log('Guardado...');
-        })
-        .catch(error => {
-            console.log('error', error)
-        });
+        .get()
+        .then(querySnapshot => {
+            _col = querySnapshot.size+1;
+            //console.log(_col)
+
+            firestore()
+            .collection('lugar_turistico')
+            .add({
+                ...values, 
+                imagen: fileName,
+                id:_col
+            })
+            .then(response => {
+                Keyboard.dismiss();
+                setIsLoading(false);
+                onClose();
+                console.log('Guardado...');
+            })
+            .catch(error => {
+                console.log('error', error)
+            });
+        }).catch(e => {console.log(e)});
     };
 
     const handleClose = () => {
@@ -71,7 +81,7 @@ const FormLugarTuristico = (props) => {
 
     return (
         <Formik
-            initialValues={{nombre:'', departamento:'', provincia:'', municipio:''}}
+            initialValues={{nombre:'', departamento:'', provincia:'', municipio:'', ubicacion:{latitude:'', longitude:''}}}
             onSubmit={handleForm}
             validationSchema={FormLugarTuristicoSchema}
         >
@@ -101,6 +111,15 @@ const FormLugarTuristico = (props) => {
                         errors.municipio && (
                         <Text style={FormStyle.messageError}>{errors.municipio}</Text>
                     )}
+
+                    <Text style={FormStyle.labelInput}>Ubicacion:</Text>
+                    <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+                        <TextInput style={{borderWidth:1,borderRadius: 5,width:'45%'}} value={values.ubicacion.latitude} onChangeText={handleChange('ubicacion.latitude')} placeholder="Latitud..." keyboardType="number" type='numeric'/>
+                        <TextInput style={{borderWidth:1,borderRadius: 5,width:'45%'}} value={values.ubicacion.longitude} onChangeText={handleChange('ubicacion.longitude')} placeholder="Longitud..." keyboardType="number" type='numeric'/>
+                    </View>
+                    
+
+                            
 
                     <Text style={FormStyle.labelInput}>Imagen:</Text>
                     <View style={FormStyle.containerImagen}>

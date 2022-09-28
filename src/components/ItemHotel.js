@@ -1,10 +1,11 @@
 import React from "react";
-import { View, Image, Text } from "react-native";
+import { View, Image, Text, Linking } from "react-native";
 import { IconButton } from "@react-native-material/core";
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as RootNavigation from '../utils/RootNavigation'
 import ItemStyle from "./Styles";
 import OptionsMenu from "react-native-option-menu";
+import firestore from '@react-native-firebase/firestore';
 
 const ItemHotel = ({item}) => {
 
@@ -16,8 +17,21 @@ const ItemHotel = ({item}) => {
         console.log('Editar')
     }
 
-    const handleDelete = () => {
-        console.log('Eliminar')
+    const handleDelete = async () => {
+        const readDoc = await firestore()
+        .collection('hotel')
+        .doc(item.firebaseId)
+        .delete()
+        .then( data => { alert("Hotel Eliminado") })
+        .catch(e => { console.log(e) });
+    }
+
+    const handelWhatsapp = async () => {
+        await Linking.openURL('https://wa.me/+591',item.telefono,'?text=Mas informacion por favor');
+    }
+
+    const handelFacebook = async () => {
+        await Linking.openURL('fb://page/PAGE_ID');
     }
 
     const myIcon = (<Icon name="ellipsis-vertical" size={30} color="#000" />)
@@ -44,8 +58,8 @@ const ItemHotel = ({item}) => {
                 <View style={ItemStyle.button}>
                     <IconButton  icon={<Icon name="information-circle-outline" size={25} color={'#006AFF'} />} onPress={handleNavigation}/>
                     <IconButton  icon={<Icon name="heart-outline" size={25} color={'#E60023'} />}/>
-                    <IconButton  icon={<Icon name="logo-whatsapp" size={25} color={'#25D366'} />}/>
-                    <IconButton  icon={<Icon name="logo-facebook" size={25} color={'#4267B2'} />}/>
+                    <IconButton  icon={<Icon name="logo-whatsapp" size={25} color={'#25D366'} />} onPress={handelWhatsapp}/>
+                    <IconButton  icon={<Icon name="logo-facebook" size={25} color={'#4267B2'} />} onPress={handelFacebook}/>
                 </View>
             </View>
         </View>

@@ -44,17 +44,27 @@ const FormHotel = (props) => {
     };
 
     const handleFirestore = (values) => {
-        firestore().collection('hotel').add({
-            ...values,
-            imagen: fileName
-        }).then(response => {
-            Keyboard.dismiss();
-            setIsLoading(false);
-            onClose();
-            console.log('Guardado hotel...');
-        }).catch(error => {
-            console.log('error', error);
-        });
+        var _col = 0;
+        firestore()
+        .collection('hotel')
+        .get()
+        .then(querySnapshot => {
+            _col = querySnapshot.size+1;
+
+            firestore().collection('hotel').add({
+                ...values,
+                imagen: fileName,
+                id:_col
+            }).then(response => {
+                Keyboard.dismiss();
+                setIsLoading(false);
+                onClose();
+                console.log('Guardado hotel...');
+            }).catch(error => {
+                console.log('error', error);
+            });
+
+        }).catch(e => {console.log(e)});
     };
 
     const handleClose = () => {
