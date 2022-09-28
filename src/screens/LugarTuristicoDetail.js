@@ -18,7 +18,7 @@ const LugarTuristicoDetail = ({navigation, route}) => {
     const getLugarTuristico = async () => {
         const result = await getLugarTuristicoById(firestoreId)
         setLugarTuristico(result.data.fields)
-        //console.log('result', lugarTuristico)
+        //console.log('result', result.data.fields)
     }
 
     return(
@@ -37,6 +37,10 @@ const LugarTuristicoDetail = ({navigation, route}) => {
               <View style={{flexDirection:'row'}}>
                 <Text style={DetailStyle.description}>Municipio: </Text>
                 <Text style={DetailStyle.detail}>{lugarTuristico?.municipio?.stringValue}</Text>
+              </View>
+              <View style={{flexDirection:'row'}}>
+                <Text style={DetailStyle.description}>Like: </Text>
+                <Text style={DetailStyle.detail}>{lugarTuristico?.like?.integerValue}</Text>
               </View>
             </View>
         </View>

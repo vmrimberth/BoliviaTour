@@ -33,6 +33,10 @@ const HotelDetail = ({navigation, route}) => {
                 <Text style={DetailStyle.description}>Direccion: </Text>
                 <Text style={DetailStyle.detail}>{hotel?.direccion?.stringValue}</Text>
               </View>
+              <View style={{flexDirection:'row'}}>
+                <Text style={DetailStyle.description}>Like: </Text>
+                <Text style={DetailStyle.detail}>{hotel?.like?.integerValue}</Text>
+              </View>
             </View>
         </View>
     );

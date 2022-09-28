@@ -23,12 +23,33 @@ const ItemLugarTuristico = ({item}) => {
     }
 
     const handleDelete = async () => {
-        const readDoc = await firestore()
+        const deleteLugarTuristico = await firestore()
         .collection('lugar_turistico')
         .doc(item.firebaseId)
         .delete()
         .then( data => { alert("Lugar Turistico Eliminado") })
         .catch(e => { console.log(e) });
+    }
+
+    const handleLike = () => {
+        var likeCount = 0;
+        firestore()
+        .collection('lugar_turistico')
+        .doc(item.firebaseId)
+        .get()
+        .then(querySnapshot => {
+            likeCount = querySnapshot.data().like+1
+            firestore()
+            .collection('lugar_turistico')
+            .doc(item.firebaseId)
+            .update({
+                like: likeCount
+            })
+            .then(() => {
+                console.log('Lugar turistico updated!');
+            });
+        })
+        .catch(e => {console.log(e)});
     }
 
     const myIcon = (<Icon name="ellipsis-vertical" size={30} color="#000" />)
@@ -56,7 +77,7 @@ const ItemLugarTuristico = ({item}) => {
                 <View style={ItemStyle.button}>
                     <IconButton  icon={<Icon name="information-circle-outline" size={25} color={'#006AFF'} />} onPress={handleNavigation}/>
                     <IconButton  icon={<Icon name="location-outline" size={25} color={'#1DB954'} />} onPress={handleNavigationUbicacion}/>
-                    <IconButton  icon={<Icon name="heart-outline" size={25} color={'#E60023'} />}/>
+                    <IconButton  icon={<Icon name="heart-outline" size={25} color={'#E60023'} />} onPress={handleLike}/>
                     <IconButton  icon={<Icon name="images-outline" size={25} color={'#6666FF'} />}/>
                 </View>
             </View>

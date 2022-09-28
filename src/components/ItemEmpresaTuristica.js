@@ -18,7 +18,7 @@ const ItemEmpresaTuristica = ({item}) => {
     }
 
     const handleDelete = async () => {
-        const readDoc = await firestore()
+        const deleteEmpresaTuristica = await firestore()
         .collection('empresa_turistica')
         .doc(item.firebaseId)
         .delete()
@@ -26,8 +26,29 @@ const ItemEmpresaTuristica = ({item}) => {
         .catch(e => { console.log(e) });
     }
 
+    const handleLike = () => {
+        var likeCount = 0;
+        firestore()
+        .collection('empresa_turistica')
+        .doc(item.firebaseId)
+        .get()
+        .then(querySnapshot => {
+            likeCount = querySnapshot.data().like+1
+            firestore()
+            .collection('empresa_turistica')
+            .doc(item.firebaseId)
+            .update({
+                like: likeCount
+            })
+            .then(() => {
+                console.log('Empresa turistica updated!');
+            });
+        })
+        .catch(e => {console.log(e)});
+    }
+
     const handelWhatsapp = async () => {
-        await Linking.openURL('https://wa.me/+591',item.telefono,'?text=Mas informacion por favor');
+        await Linking.openURL('https://wa.me/+59173838529?text=Mas informacion por favor');
     }
 
     const handelFacebook = async () => {
@@ -59,7 +80,7 @@ const ItemEmpresaTuristica = ({item}) => {
                 </View>
                 <View style={ItemStyle.button}>
                     <IconButton  icon={<Icon name="information-circle-outline" size={25} color={'#006AFF'} />} onPress={handleNavigation}/>
-                    <IconButton  icon={<Icon name="heart-outline" size={25} color={'#E60023'} />}/>
+                    <IconButton  icon={<Icon name="heart-outline" size={25} color={'#E60023'} />} onPress={handleLike}/>
                     <IconButton  icon={<Icon name="logo-whatsapp" size={25} color={'#25D366'} />} onPress={handelWhatsapp}/>
                     <IconButton  icon={<Icon name="logo-facebook" size={25} color={'#4267B2'} />} onPress={handelFacebook}/>
                 </View>

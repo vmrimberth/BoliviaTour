@@ -35,6 +35,10 @@ const EmpresaTuristicaDetail = ({navigation, route}) => {
                 <Text style={DetailStyle.description}>Direccion: </Text>
                 <Text style={DetailStyle.detail}>{empresaTuristica?.direccion?.stringValue}</Text>
               </View>
+              <View style={{flexDirection:'row'}}>
+                <Text style={DetailStyle.description}>Like: </Text>
+                <Text style={DetailStyle.detail}>{empresaTuristica?.like?.integerValue}</Text>
+              </View>
             </View>
         </View>
     );

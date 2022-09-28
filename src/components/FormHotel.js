@@ -54,7 +54,8 @@ const FormHotel = (props) => {
             firestore().collection('hotel').add({
                 ...values,
                 imagen: fileName,
-                id:_col
+                id:_col,
+                like:0
             }).then(response => {
                 Keyboard.dismiss();
                 setIsLoading(false);

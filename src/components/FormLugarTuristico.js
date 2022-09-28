@@ -61,7 +61,8 @@ const FormLugarTuristico = (props) => {
             .add({
                 ...values, 
                 imagen: fileName,
-                id:_col
+                id:_col,
+                like:0
             })
             .then(response => {
                 Keyboard.dismiss();
