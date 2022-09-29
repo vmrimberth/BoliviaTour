@@ -11,6 +11,7 @@ const ItemLugarTuristico = ({item}) => {
     //console.log("item: ", item)
     const handleNavigation = () => {
         RootNavigation.navigate('LugarTuristicoDetail', {firestoreId:item.firebaseId, imagen:item.imagen});
+        //console.log("item: ", item)
     };
 
     const handleNavigationUbicacion = () => {

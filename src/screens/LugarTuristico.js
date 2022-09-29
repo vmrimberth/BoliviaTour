@@ -40,6 +40,8 @@ const LugarTuristico = (props) => {
             resultPromises.forEach((url, index) => {
                 tempLugarTuristicoList[index].imagen = url;
             })
+            //console.log(tempLugarTuristicoList)
+            
             setLugarTuristicoList(tempLugarTuristicoList);
         });
         //.then();
