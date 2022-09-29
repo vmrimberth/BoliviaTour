@@ -14,6 +14,7 @@ import EmpresaTuristicaDetail from "./src/screens/EmpresaTuristicaDetail"
 import Hotel from './src/screens/Hotel';
 import HotelDetail from './src/screens/HotelDetail'
 import LugarTuristicoMap from './src/screens/LugarTuristicoMap';
+import LugarTuristicoPhotos from './src/screens/LugarTuristicoPhotos';
 import { navigationRef } from './src/utils/RootNavigation';
 
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -48,6 +49,15 @@ const App = () => {
             },}}/>
           <Stack.Screen name="LugarTuristicoMap" component={LugarTuristicoMap} options={{
             title:'Ubicacion lugar turistico',
+            headerStyle: {
+              backgroundColor: '#f4511e',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },}}/>
+          <Stack.Screen name="LugarTuristicoPhotos" component={LugarTuristicoPhotos} options={{
+            title:'Galeria de imagenes',
             headerStyle: {
               backgroundColor: '#f4511e',
             },

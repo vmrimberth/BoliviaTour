@@ -52,6 +52,10 @@ const ItemLugarTuristico = ({item}) => {
         .catch(e => {console.log(e)});
     }
 
+    const handleNavigationPhotos = () => {
+        RootNavigation.navigate('LugarTuristicoPhotos', {firestoreId:item.firebaseId});
+    };
+
     const myIcon = (<Icon name="ellipsis-vertical" size={30} color="#000" />)
 
     return (
@@ -78,7 +82,7 @@ const ItemLugarTuristico = ({item}) => {
                     <IconButton  icon={<Icon name="information-circle-outline" size={25} color={'#006AFF'} />} onPress={handleNavigation}/>
                     <IconButton  icon={<Icon name="location-outline" size={25} color={'#1DB954'} />} onPress={handleNavigationUbicacion}/>
                     <IconButton  icon={<Icon name="heart-outline" size={25} color={'#E60023'} />} onPress={handleLike}/>
-                    <IconButton  icon={<Icon name="images-outline" size={25} color={'#6666FF'} />}/>
+                    <IconButton  icon={<Icon name="images-outline" size={25} color={'#6666FF'} />} onPress={handleNavigationPhotos}/>
                 </View>
             </View>
         </View>
